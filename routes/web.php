@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Livewire\Counter;
+use App\Livewire\Dashboard;
 
-
-Route::get('/', Counter::class);
+Route::get('/', Dashboard::class)->name('home');
