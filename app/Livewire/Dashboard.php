@@ -3,12 +3,13 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Http;
 
 class Dashboard extends Component
 {
     public $cryptoData = [];
-    public $isLoading = true;
+    public $page = 1;
     public $error = null;
 
     public function mount()
@@ -18,14 +19,12 @@ class Dashboard extends Component
 
     public function fetchCryptoData()
     {
-        $this->isLoading = true;
-
         try {
             $response = Http::get('https://api.coingecko.com/api/v3/coins/markets', [
                 'vs_currency' => 'usd',
                 'order' => 'market_cap_desc',
                 'per_page' => 10,
-                'page' => 1,
+                'page' => $this->page,
                 'sparkline' => false,
                 'price_change_percentage' => '1h,24h,7d'
             ]);
@@ -38,8 +37,12 @@ class Dashboard extends Component
         } catch (\Exception $e) {
             $this->error = 'Error connecting to crypto API: ' . $e->getMessage();
         }
-        
-        $this->isLoading = false;
+    }
+
+    #[On('page-changed')]
+    public function handlePageChange($newPage){
+        $this->page = $newPage;
+        $this->fetchCryptoData();
     }
 
     public function render()

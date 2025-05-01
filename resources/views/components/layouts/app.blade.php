@@ -9,7 +9,9 @@
     @vite('resources/css/app.css')
 
     {{-- title --}}
-    <title>{{ $title ?? 'Crypto Tracker' }}</title>
+    <title>
+        {{ $title ?? 'Crypto Tracker' }}
+    </title>
 </head>
 
 <body>
