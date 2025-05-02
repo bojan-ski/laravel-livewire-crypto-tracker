@@ -17,7 +17,6 @@
         <div class="overflow-x-auto bg-white shadow-md rounded-xl mb-7">
 
             <table class="min-w-full divide-y divide-slate-200">
-
                 <thead class="bg-slate-50">
                     <tr>
                         <th class="px-3 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">
@@ -125,7 +124,13 @@
 
         </div>
 
-        {{-- pagination --}}
-        <livewire:dashboard-pagination :page="$page" :cryptoData="$cryptoData" />
+        <div class="flex items-center justify-between mb-10">            
+            {{-- per page select option --}}
+            <livewire:dashboard-select-per-page-option />
+
+            {{-- pagination --}}
+            <livewire:dashboard-pagination :page="$page" :cryptoData="$cryptoData" />    
+        </div>
+
     </div>
 </div>

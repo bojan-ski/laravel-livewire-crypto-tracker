@@ -1,4 +1,4 @@
-<div class="flex items-center justify-center mb-10">
+<div class="flex items-center justify-center">
     <button wire:click="prevPage()" type="button"
         class="text-white px-4 py-1.5 bg-blue-500 hover:bg-blue-700 rounded-lg cursor-pointer">
         Prev

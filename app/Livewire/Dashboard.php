@@ -10,20 +10,23 @@ class Dashboard extends Component
 {
     public $cryptoData = [];
     public $page = 1;
+    public $perPage = 10;
     public $error = null;
 
+    // initial fetch
     public function mount()
     {
         $this->fetchCryptoData();
     }
 
+    // api call - fetch crypto data
     public function fetchCryptoData()
     {
         try {
             $response = Http::get('https://api.coingecko.com/api/v3/coins/markets', [
                 'vs_currency' => 'usd',
                 'order' => 'market_cap_desc',
-                'per_page' => 10,
+                'per_page' => $this->perPage,
                 'page' => $this->page,
                 'sparkline' => false,
                 'price_change_percentage' => '1h,24h,7d'
@@ -39,12 +42,21 @@ class Dashboard extends Component
         }
     }
 
+     // per page change/update
+     #[On('per-page-changed')]
+     public function handlePerPageChange($newPerPageValue){
+         $this->perPage = $newPerPageValue;
+         $this->fetchCryptoData();
+     }
+
+    // pagiantion change/update
     #[On('page-changed')]
     public function handlePageChange($newPage){
         $this->page = $newPage;
         $this->fetchCryptoData();
-    }
+    }   
 
+    // render view
     public function render()
     {
         return view('livewire.dashboard');
