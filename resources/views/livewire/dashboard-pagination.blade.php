@@ -1,15 +1,15 @@
-<div class="flex items-center justify-center">
+<div class="flex items-center justify-center gap-6 mt-4">
     <button wire:click="prevPage()" type="button"
-        class="text-white px-4 py-1.5 bg-blue-500 hover:bg-blue-700 rounded-lg cursor-pointer">
+        class="px-5 py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold rounded-lg shadow-md hover:from-pink-600 hover:to-purple-600 transition duration-300 curser-pointer">
         Prev
     </button>
 
-    <p class="mx-5 text-lg font-semibold">
+    <p class="text-lg font-bold text-slate-100">
         {{ $page }}
     </p>
 
     <button wire:click="nextPage()" type="button"
-        class="text-white px-4 py-1.5 bg-blue-500 hover:bg-blue-700 rounded-lg cursor-pointer">
+        class="px-5 py-2 bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold rounded-lg shadow-md hover:from-cyan-600 hover:to-teal-600 transition duration-300 curser-pointer">
         Next
     </button>
 </div>

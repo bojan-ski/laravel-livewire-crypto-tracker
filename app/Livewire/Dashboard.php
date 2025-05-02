@@ -5,22 +5,23 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Http;
+use Illuminate\View\View;
 
 class Dashboard extends Component
 {
     public $cryptoData = [];
-    public $page = 1;
-    public $perPage = 10;
-    public $error = null;
+    public int $page = 1;
+    public int $perPage = 10;
+    public ?string $error = null;
 
     // initial fetch
-    public function mount()
+    public function mount(): void
     {
         $this->fetchCryptoData();
     }
 
     // api call - fetch crypto data
-    public function fetchCryptoData()
+    public function fetchCryptoData(): void
     {
         try {
             $response = Http::get('https://api.coingecko.com/api/v3/coins/markets', [
@@ -33,7 +34,7 @@ class Dashboard extends Component
             ]);
 
             if ($response->successful()) {
-                $this->cryptoData = $response->json();
+                $this->cryptoData = collect($response->json());
             } else {
                 $this->error = 'Failed to fetch crypto data. API returned status: ' . $response->status();
             }
@@ -42,22 +43,31 @@ class Dashboard extends Component
         }
     }
 
-     // per page change/update
-     #[On('per-page-changed')]
-     public function handlePerPageChange($newPerPageValue){
-         $this->perPage = $newPerPageValue;
-         $this->fetchCryptoData();
-     }
+    // sort crypto data
+    #[On('sort-crypto-data')]
+    public function handleSortCryptoData(object $sortedCryptoData): void
+    {
+        $this->cryptoData = $sortedCryptoData;
+    }
+
+    // per page change/update
+    #[On('per-page-changed')]
+    public function handlePerPageChange(int $newPerPageValue): void
+    {
+        $this->perPage = $newPerPageValue;
+        $this->fetchCryptoData();
+    }
 
     // pagiantion change/update
     #[On('page-changed')]
-    public function handlePageChange($newPage){
+    public function handlePageChange(int $newPage): void
+    {
         $this->page = $newPage;
         $this->fetchCryptoData();
-    }   
+    }
 
     // render view
-    public function render()
+    public function render(): View
     {
         return view('livewire.dashboard');
     }
