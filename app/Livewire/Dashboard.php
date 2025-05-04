@@ -13,6 +13,7 @@ class Dashboard extends Component
     public int $page = 1;
     public int $perPage = 10;
     public ?string $error = null;
+    public $searchedCryptoData = [];
 
     // initial fetch
     public function mount(): void
@@ -43,6 +44,25 @@ class Dashboard extends Component
         }
     }
 
+    // search for specific crypto data
+    #[On('search-for-cryptos')]
+    public function handleSearchCryptoData(array $payload): void
+    {
+        $searchTerm = $payload['searchTerm'] ?? '';
+        $this->searchedCryptoData = $payload['searchedCryptoData'] ?? [];
+
+        if ($searchTerm && count($this->searchedCryptoData) === 0) {
+            $this->cryptoData = $this->searchedCryptoData;
+        }
+    }
+
+    #[On('reset-search')]
+    public function handleResetSearch(): void
+    {
+        $this->fetchCryptoData();
+        $this->searchedCryptoData = [];
+    }
+
     // sort crypto data
     #[On('sort-crypto-data')]
     public function handleSortCryptoData(object $sortedCryptoData): void
@@ -58,7 +78,7 @@ class Dashboard extends Component
         $this->fetchCryptoData();
     }
 
-    // pagiantion change/update
+    // pagination change/update
     #[On('page-changed')]
     public function handlePageChange(int $newPage): void
     {

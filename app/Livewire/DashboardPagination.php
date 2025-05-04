@@ -2,8 +2,8 @@
 
 namespace App\Livewire;
 
-use Illuminate\View\View;
 use Livewire\Component;
+use Illuminate\View\View;
 
 class DashboardPagination extends Component
 {

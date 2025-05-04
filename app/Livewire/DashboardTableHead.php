@@ -11,7 +11,7 @@ class DashboardTableHead extends Component
     public string $sortField = 'market_cap_rank';
     public string $sortDirection = 'asc';
 
-    public function mount(object $cryptoData): void
+    public function mount($cryptoData): void
     {
         $this->cryptoData = $cryptoData;
     }
