@@ -36,6 +36,7 @@ class Dashboard extends Component
 
             if ($response->successful()) {
                 $this->cryptoData = collect($response->json());
+                // dd($this->cryptoData);
             } else {
                 $this->error = 'Failed to fetch crypto data. API returned status: ' . $response->status();
             }
