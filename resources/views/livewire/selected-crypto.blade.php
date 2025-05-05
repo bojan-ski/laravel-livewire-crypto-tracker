@@ -1,4 +1,4 @@
-<div class="selected-crypto-page min-h-screen my-10">
+<div class="selected-crypto-page my-10">
     <div class="max-w-5xl mx-auto">
 
         @if($error)
