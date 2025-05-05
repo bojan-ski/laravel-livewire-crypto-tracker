@@ -50,7 +50,7 @@
 
             {{-- link to login page --}}
             <div class="text-center mt-4">
-                <a href="{{ route('login') }}"
+                <a href="{{ route('login') }}" wire:navigate.hover
                     class="text-sm text-cyan-400 hover:text-cyan-300 hover:underline transition duration-200">
                     Already have an account? Login
                 </a>

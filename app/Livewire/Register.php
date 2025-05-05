@@ -40,9 +40,11 @@ class Register extends Component
             // redirect user
             $this->redirectIntended('/', navigate: true);
         } catch (\Exception $e) {
-            dd($e);
             // error msg
             session()->flash('status', 'There was an error creating the account.');
+
+            // redirect user
+            $this->redirectIntended('register', navigate: true);
         }
     }
 
