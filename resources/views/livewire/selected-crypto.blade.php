@@ -2,8 +2,13 @@
     <div class="max-w-5xl mx-auto">
 
         @if($error)
-            <div class="bg-red-700/20 text-red-300 border border-red-500 px-6 py-4 rounded-lg text-center font-medium">
-                Error: {{ $error }}
+            <div class="text-center bg-red-600/10 border border-red-500 text-red-400 px-4 py-3 rounded mb-4" role="alert">
+                <strong class="font-bold">
+                    Error:
+                </strong>
+                <span class="block sm:inline">
+                    {{ $error }}
+                </span>
             </div>
         @elseif(!$selectedCryptoData->isEmpty())
             <div class="bg-gradient-to-br from-indigo-950 to-purple-900 rounded-2xl shadow-lg border border-white/20 p-6">

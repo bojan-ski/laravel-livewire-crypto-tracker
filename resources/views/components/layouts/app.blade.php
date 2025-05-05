@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {{-- tailwind --}}
+    {{-- tailwind import --}}
     @vite('resources/css/app.css')
 
     {{-- title --}}
@@ -15,7 +15,16 @@
 </head>
 
 <body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-    {{ $slot }}
+    {{-- HEADER --}}
+
+
+    {{-- MAIN - app content --}}
+    <main>
+        {{ $slot }}
+    </main>
+
+    {{-- FOOTER --}}
+    <livewire:footer />
 </body>
 
 </html>
