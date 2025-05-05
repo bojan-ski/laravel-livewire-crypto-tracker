@@ -26,6 +26,17 @@
     {{-- HEADER --}}
     <livewire:header />
 
+    {{-- flash message --}}
+    @if (session('status'))
+        <div class="pop-up-message fixed inset-0 z-100 bg-black/25 bg-opacity-15 pt-[150px]">
+            <div class="max-w-max mx-auto p-6 md:px-8 rounded-lg bg-violet-500">
+                <p class="text-2xl text-white font-semibold">
+                    {{ session('status') }}
+                </p>
+            </div>
+        </div>
+    @endif
+
     {{-- MAIN - app content --}}
     <main>
         {{ $slot }}
