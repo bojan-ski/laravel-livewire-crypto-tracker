@@ -10,7 +10,7 @@
         <div class="flex items-center gap-4">
             @auth
                 {{-- portfolio link --}}
-                <a href="{{ route('register') }}" wire:navigate.hover
+                <a href="{{ route('portfolio') }}" wire:navigate.hover
                     class="flex items-center gap-2 px-5 py-2 rounded-md text-sm md:text-base font-semibold text-white bg-gradient-to-r from-purple-800 via-purple-600 to-pink-500 hover:brightness-110 transition duration-300 shadow-md {{ request()->is('register') ? 'ring-2 ring-cyan-400' : '' }}">
                     <i class="fa-solid fa-star"></i>
                     <span class="hidden md:block">Portfolio</span>
