@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Dashboard;
 use App\Livewire\Login;
 use App\Livewire\Register;
-use App\Livewire\Portfolio;
 use App\Livewire\SelectedCrypto;
+use App\Livewire\AddCrypto;
+use App\Livewire\Portfolio;
 
 // GUEST ONLY
 Route::middleware('guest')->group(function () {
@@ -15,6 +16,7 @@ Route::middleware('guest')->group(function () {
 
 // AUTH ONLY
 Route::middleware('auth')->group(function () {
+    Route::get('/{cryptoId}/add_crypto', AddCrypto::class)->name('addCrypto');
     Route::get('/portfolio', Portfolio::class)->name('portfolio');
 });
 

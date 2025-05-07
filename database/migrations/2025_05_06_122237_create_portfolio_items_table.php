@@ -15,15 +15,14 @@ return new class extends Migration
             $table->id();
             $table->foreignId('portfolio_id')->constrained('portfolios')->onDelete('cascade');
             $table->string('coin_id');
-            $table->decimal('quantity', 20, 8);
-            $table->decimal('purchase_price', 20, 8)->nullable();
+            $table->decimal('quantity', 20, 4);
+            $table->decimal('crypto_purchase_price', 20, 4)->nullable();
+            $table->decimal('crypto_market_price_on_purchase', 20, 4)->nullable();
+            $table->decimal('total_spend', 20, 4)->nullable();
             $table->string('purchase_currency', 20)->default('USD')->nullable();
-            $table->decimal('crypto_price_on_purchase_day_usd', 20, 8)->nullable();
-            $table->decimal('crypto_price_on_purchase_day_ecosystem', 20, 8)->nullable();
-            $table->decimal('sell_price', 20, 8)->nullable();
-            $table->string('sell_currency', 20)->default('USD')->nullable();
-            $table->decimal('crypto_price_on_sell_day_usd', 20, 8)->nullable();
-            $table->decimal('crypto_price_on_sell_day_ecosystem', 20, 8)->nullable();
+            $table->decimal('crypto_sell_price', 20, 4)->nullable();
+            $table->decimal('crypto_market_price_on_sell', 20, 4)->nullable();
+            $table->decimal('total_received', 20, 4)->nullable();
             $table->timestamps();
         });
     }

@@ -15,14 +15,13 @@ class PortfolioItem extends Model
         'portfolio_id',
         'coin_id',
         'quantity',
-        'purchase_price',
+        'crypto_purchase_price',
+        'crypto_market_price_on_purchase',
+        'total_spend',
         'purchase_currency',
-        'crypto_price_on_purchase_day_usd',
-        'crypto_price_on_purchase_day_ecosystem',
-        'sell_price',
-        'sell_currency',
-        'crypto_price_on_sell_day_usd',
-        'crypto_price_on_sell_day_ecosystem',
+        'crypto_sell_price',
+        'crypto_market_price_on_sell',
+        'total_received',
     ];
 
     // relation to the portfolios table

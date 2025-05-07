@@ -13,37 +13,42 @@
         @elseif(!$selectedCryptoData->isEmpty())
             <div class="bg-gradient-to-br from-indigo-950 to-purple-900 rounded-2xl shadow-lg border border-white/20 p-6">
 
-                {{-- Primary data --}}
-                <div class="flex items-center space-x-6 mb-5">
-                    {{-- image --}}
-                    @if($selectedCryptoData['image']['large'] ?? null)
-                        <img src="{{ $selectedCryptoData['image']['large'] }}" alt="{{ $selectedCryptoData->get('name') }} logo" class="h-20 w-20 rounded-full shadow-lg">
-                    @endif
-
-                    <div class="space-y-2">
-                        {{-- symbol --}}
-                        <h2 class="text-3xl font-bold text-white">
-                            {{ $selectedCryptoData['name'] }} ({{ strtoupper($selectedCryptoData['symbol']) }})
-                        </h2>
-                        {{-- rank --}}
-                        <p class="text-sm text-gray-300">
-                        Rank #{{ $selectedCryptoData['market_cap_rank'] }}
-                        </p>
-                        {{-- genesis --}}
-                        <p class="text-sm text-gray-300">
-                            Genesis: {{ $selectedCryptoData['genesis_date'] ?? 'N/A' }}
-                        </p>
-                        {{-- algorithm --}}
-                        <p class="text-sm text-gray-300">
-                            Algorithm: {{ $selectedCryptoData['hashing_algorithm'] ?? 'N/A' }}
-                        </p>
-                        {{-- asset platform id --}}
-                        @if ($selectedCryptoData['asset_platform_id'])
-                            <p class="text-sm text-gray-300">
-                                Ecosystem: {{ strtoupper($selectedCryptoData['asset_platform_id']) }}
-                            </p>                                
+                {{-- Primary data & add crypto link --}}
+                <div class="flex justify-between mb-5">
+                    <div class="flex items-center space-x-5">
+                        {{-- image --}}
+                        @if($selectedCryptoData['image']['large'] ?? null)
+                            <img src="{{ $selectedCryptoData['image']['large'] }}" alt="{{ $selectedCryptoData->get('name') }} logo" class="h-20 w-20 rounded-full shadow-lg">
                         @endif
+
+                        <div class="space-y-2">
+                            {{-- name & symbol --}}
+                            <h2 class="text-3xl font-bold text-white">
+                                {{ $selectedCryptoData['name'] }} ({{ strtoupper($selectedCryptoData['symbol']) }})
+                            </h2>
+                            {{-- rank --}}
+                            <p class="text-sm text-gray-300">
+                                Rank #{{ $selectedCryptoData['market_cap_rank'] }}
+                            </p>
+                            {{-- genesis --}}
+                            <p class="text-sm text-gray-300">
+                                Genesis: {{ $selectedCryptoData['genesis_date'] ?? 'N/A' }}
+                            </p>
+                            {{-- algorithm --}}
+                            <p class="text-sm text-gray-300">
+                                Algorithm: {{ $selectedCryptoData['hashing_algorithm'] ?? 'N/A' }}
+                            </p>
+                            {{-- ecosystem --}}
+                            @if ($selectedCryptoData['asset_platform_id'])
+                                <p class="text-sm text-gray-300">
+                                    Ecosystem: {{ strtoupper($selectedCryptoData['asset_platform_id']) }}
+                                </p>                                
+                            @endif
+                        </div>
                     </div>
+
+                    {{-- add crypto option --}}
+                    <livewire:add-crypto-option :$selectedCryptoData />
                 </div>                  
               
                 {{-- Market Data --}}

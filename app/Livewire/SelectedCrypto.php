@@ -11,7 +11,7 @@ class SelectedCrypto extends Component
     public $selectedCryptoData = [];
     public ?string $error = null;
 
-    // initial fetch
+    // initial setup
     public function mount($cryptoId): void
     {
         $this->selectedCryptoDataId = $cryptoId;

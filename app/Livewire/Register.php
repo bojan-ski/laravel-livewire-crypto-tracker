@@ -8,6 +8,7 @@ use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Portfolio;
 
 #[Title('Register')]
 class Register extends Component
@@ -34,6 +35,11 @@ class Register extends Component
             // login user
             Auth::login($newUser);
 
+            // create new user portfolios
+            Portfolio::create([
+                'user_id' => Auth::id()
+            ]);
+
             // success msg
             session()->flash('status', 'Account created.');
 
@@ -44,7 +50,7 @@ class Register extends Component
             session()->flash('status', 'There was an error creating the account.');
 
             // redirect user
-            $this->redirectIntended('register', navigate: true);
+            $this->redirectIntended('/', navigate: true);
         }
     }
 
