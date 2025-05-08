@@ -47,8 +47,12 @@
                         </div>
                     </div>
 
-                    {{-- add crypto option --}}
-                    <livewire:add-crypto-option :$selectedCryptoData />
+                    <div>
+                        {{-- add crypto option --}}
+                        <livewire:update-portfolio icon='fa-plus' :selectedCryptoDataId="$selectedCryptoData['id']" path='addCrypto' :$selectedCryptoData />
+                        {{-- deduct crypto option --}}
+                        <livewire:update-portfolio icon='fa-minus' :selectedCryptoDataId="$selectedCryptoData['id']" path='deductCrypto' :$selectedCryptoData />
+                    </div>
                 </div>                  
               
                 {{-- Market Data --}}

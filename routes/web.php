@@ -6,6 +6,7 @@ use App\Livewire\Login;
 use App\Livewire\Register;
 use App\Livewire\SelectedCrypto;
 use App\Livewire\AddCrypto;
+use App\Livewire\DeductCrypto;
 use App\Livewire\Portfolio;
 
 // GUEST ONLY
@@ -17,6 +18,7 @@ Route::middleware('guest')->group(function () {
 // AUTH ONLY
 Route::middleware('auth')->group(function () {
     Route::get('/{cryptoId}/add_crypto', AddCrypto::class)->name('addCrypto');
+    Route::get('/{cryptoId}/deduct_crypto', DeductCrypto::class)->name('deductCrypto');
     Route::get('/portfolio', Portfolio::class)->name('portfolio');
 });
 

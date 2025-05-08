@@ -6,13 +6,19 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
-class AddCryptoOption extends Component
+class UpdatePortfolio extends Component
 {
+    public string $icon;
+    public string $path;
+    public string $selectedCryptoDataId;
     public $selectedCryptoData = [];
 
     // initial setup
-    public function mount($selectedCryptoData): void
+    public function mount($icon, $path, $selectedCryptoDataId, $selectedCryptoData): void
     {
+        $this->icon = $icon;
+        $this->path = $path;
+        $this->selectedCryptoDataId = $selectedCryptoDataId;
         $this->selectedCryptoData = $selectedCryptoData;
     }
 
@@ -23,12 +29,12 @@ class AddCryptoOption extends Component
         Session::put('selectedCryptoData', $this->selectedCryptoData);
 
         // redirect user
-        $this->redirectRoute('addCrypto', ['cryptoId' => $this->selectedCryptoData['id']]);
+        $this->redirectRoute("$this->path", ['cryptoId' => $this->selectedCryptoDataId]);
     }
 
     // render view
     public function render(): View
     {
-        return view('livewire.add-crypto-option');
+        return view('livewire.update-portfolio');
     }
 }
