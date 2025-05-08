@@ -6,8 +6,7 @@
             <div class="flex items-center space-x-4 border-b border-white/10 pb-5 mb-5">
                 {{-- image --}}
                 @if($selectedCryptoData['image']['large'] ?? null)
-                    <img src="{{ $selectedCryptoData['image']['large'] }}" alt="{{ $selectedCryptoData->get('name') }} logo"
-                        class="h-20 w-20 rounded-full shadow-lg">
+                    <img src="{{ $selectedCryptoData['image']['large'] }}" alt="{{ $selectedCryptoData['name'] }}" class="h-20 w-20 rounded-full shadow-lg">
                 @endif
 
                 <div class="space-y-2">

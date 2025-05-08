@@ -10,15 +10,16 @@
                     {{ $error }}
                 </span>
             </div>
-        @elseif(!$selectedCryptoData->isEmpty())
+        @else
             <div class="bg-gradient-to-br from-indigo-950 to-purple-900 rounded-2xl shadow-lg border border-white/20 p-6">
 
-                {{-- Primary data & add crypto link --}}
+                {{-- Primary data & update portfolio links --}}
                 <div class="flex justify-between mb-5">
+                    {{-- primary data --}}
                     <div class="flex items-center space-x-5">
                         {{-- image --}}
                         @if($selectedCryptoData['image']['large'] ?? null)
-                            <img src="{{ $selectedCryptoData['image']['large'] }}" alt="{{ $selectedCryptoData->get('name') }} logo" class="h-20 w-20 rounded-full shadow-lg">
+                            <img src="{{ $selectedCryptoData['image']['large'] }}" alt="{{ $selectedCryptoData['name'] }}" class="h-20 w-20 rounded-full shadow-lg">
                         @endif
 
                         <div class="space-y-2">
@@ -47,6 +48,7 @@
                         </div>
                     </div>
 
+                    {{-- Update portfolio links --}}
                     <div>
                         {{-- add crypto option --}}
                         <livewire:update-portfolio icon='fa-plus' :selectedCryptoDataId="$selectedCryptoData['id']" path='addCrypto' :$selectedCryptoData />

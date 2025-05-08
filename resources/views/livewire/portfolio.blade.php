@@ -27,9 +27,16 @@
                             {{ strtoupper($coinId) }}
                         </h4>
 
-                        <button class="text-blue-500 hover:text-blue-700 cursor-pointer" type="button" onclick="window.location.href='{{ route('show', ['cryptoId' => $coinId]) }}'">
+                        {{-- <button class="text-blue-500 hover:text-blue-700 cursor-pointer" type="button" onclick="window.location.href='{{ route('show', ['cryptoId' => $coinId]) }}'">
                             See details
-                        </button>
+                        </button> --}}
+
+                        <div>
+                            {{-- add crypto option --}}
+                            <livewire:update-portfolio icon='fa-plus' :selectedCryptoDataId="$coinId" path='addCrypto' />
+                            {{-- deduct crypto option --}}
+                            <livewire:update-portfolio icon='fa-minus' :selectedCryptoDataId="$coinId" path='deductCrypto' />
+                        </div>
                     </div>
 
                     {{-- crypto data - table --}}

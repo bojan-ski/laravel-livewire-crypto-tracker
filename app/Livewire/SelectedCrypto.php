@@ -3,47 +3,32 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use Illuminate\Support\Facades\Http;
+use App\Traits\FetchCryptoDataTrait;
+use Illuminate\View\View;
 
 class SelectedCrypto extends Component
 { 
-    public string $selectedCryptoDataId;
+    // import helper function/trait
+    use FetchCryptoDataTrait;
+
+    // variables
     public $selectedCryptoData = [];
     public ?string $error = null;
 
     // initial setup
     public function mount($cryptoId): void
     {
-        $this->selectedCryptoDataId = $cryptoId;
-        $this->fetchSelectedCryptoData();
-    }
+        $apiCall = $this->fetchSelectedCryptoData($cryptoId);
 
-    // api call - fetch selected crypto data
-    public function fetchSelectedCryptoData(): void
-    {
-        try {
-            $response = Http::get("https://api.coingecko.com/api/v3/coins/{$this->selectedCryptoDataId}", [
-                'localization' => 'false',
-                'tickers' => 'false',
-                'market_data' => 'true',
-                'community_data' => 'false',
-                'developer_data' => 'false',
-                'sparkline' => true,
-            ]);
-
-            if ($response->successful()) {
-                $this->selectedCryptoData = collect($response->json());
-                // dd($this->selectedCryptoData);
-            } else {
-                $this->error = 'Failed to fetch crypto data. API returned status: ' . $response->status();
-            }
-        } catch (\Exception $e) {
-            $this->error = 'Error connecting to crypto API: ' . $e->getMessage();
+        if(is_array($apiCall)){
+            $this->selectedCryptoData = $apiCall;
+        }else{
+            $this->error = $apiCall;
         }
     }
 
     // render view
-    public function render()
+    public function render(): View
     {
         return view('livewire.selected-crypto');
     }
