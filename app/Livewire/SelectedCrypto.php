@@ -3,9 +3,11 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\Attributes\Title;
 use Illuminate\View\View;
 use App\Traits\FetchCryptoDataTrait;
 
+#[Title('Selected Crypto')]
 class SelectedCrypto extends Component
 { 
     // import helper function/trait

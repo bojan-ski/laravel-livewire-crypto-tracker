@@ -7,12 +7,14 @@ use Livewire\Attributes\Validate;
 use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 use App\Models\User;
 use App\Models\Portfolio;
 
 #[Title('Register')]
 class Register extends Component
 {
+    // form validation and variables
     #[Validate('required|string|email|max:64|unique:users')]
     public $email;
     #[Validate('required|string|min:6|confirmed')]
@@ -20,6 +22,7 @@ class Register extends Component
     #[Validate('required|string|min:6')]
     public $password_confirmation;
 
+    // register new user func
     public function register(): void
     {
         // validate new user form data
@@ -55,7 +58,7 @@ class Register extends Component
     }
 
     // render view
-    public function render()
+    public function render(): View
     {
         return view('livewire.register');
     }

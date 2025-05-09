@@ -8,6 +8,7 @@ use Illuminate\View\View;
 
 class DashboardSelectPerPageOption extends Component
 {
+    // change the number of crypto per page func 
     public function setPerPage(int $value)
     {
         // check if user has altered the html
@@ -21,6 +22,7 @@ class DashboardSelectPerPageOption extends Component
         $this->dispatch('per-page-changed', $value)->to(Dashboard::class);
     }
 
+    // render view
     public function render(): View
     {
         return view('livewire.dashboard-select-per-page-option');

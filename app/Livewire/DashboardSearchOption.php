@@ -10,6 +10,7 @@ use Illuminate\View\View;
 
 class DashboardSearchOption extends Component
 {
+    // validation & variables
     #[Url(as: 'q')]
     #[Validate('required|string|min:2|max:30')]
     public string $searchTerm = '';

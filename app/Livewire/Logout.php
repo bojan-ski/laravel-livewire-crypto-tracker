@@ -4,9 +4,11 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class Logout extends Component
 {
+    // logout user func
     public function logout()
     {
         // logout user
@@ -25,8 +27,7 @@ class Logout extends Component
         $this->redirectIntended('/', navigate: true);
     }
 
-
-    public function render()
+    public function render(): View
     {
         return view('livewire.logout');
     }

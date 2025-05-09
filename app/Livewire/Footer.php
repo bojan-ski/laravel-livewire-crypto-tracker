@@ -3,10 +3,12 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Illuminate\View\View;
 
 class Footer extends Component
 {
-    public function render()
+    // render view
+    public function render(): View
     {
         return view('livewire.footer');
     }

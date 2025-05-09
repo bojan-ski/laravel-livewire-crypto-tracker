@@ -4,11 +4,13 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\Attributes\Validate;
+use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PortfolioItem;
 
+#[Title('Add Crypto')]
 class AddCrypto extends Component
 {
     // variables

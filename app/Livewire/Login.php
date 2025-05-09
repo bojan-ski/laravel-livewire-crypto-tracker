@@ -7,15 +7,18 @@ use Livewire\Attributes\Validate;
 use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 
 #[Title('Login')]
 class Login extends Component
 {
+    // form validation and variables
     #[Validate('required|string|email|max:64')]
     public $email;
     #[Validate('required|string|min:6')]
     public $password;
 
+    // login user func
     public function login(): void
     {
         // validate new user form data
@@ -46,7 +49,7 @@ class Login extends Component
     }
 
     // render view
-    public function render()
+    public function render(): View
     {
         return view('livewire.login');
     }

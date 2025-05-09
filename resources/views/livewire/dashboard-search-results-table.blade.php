@@ -18,7 +18,7 @@
         </thead>
         <tbody class="bg-slate-900 divide-y divide-slate-700">
             @foreach ($searchedCryptoData as $crypto)
-                <tr class="hover:bg-gray-800 transition-all duration-100 ease-in-out">
+                <tr class="hover:bg-gray-800 transition-all duration-100 ease-in-out cursor-pointer" onclick="window.location.href='{{ route('show', ['cryptoId' => $crypto['id']]) }}'">
                     <td class="px-6 py-4">
                         {{ $crypto['market_cap_rank'] }}
                     </td>

@@ -9,6 +9,7 @@ use Illuminate\View\View;
 
 class Dashboard extends Component
 {
+    // variables
     public $cryptoData = [];
     public int $page = 1;
     public int $perPage = 10;

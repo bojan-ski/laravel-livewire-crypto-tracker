@@ -1,5 +1,3 @@
-@php $groupedItems = $portfolioItems->groupBy('coin_id'); @endphp
-
 <div class="portfolio-page my-10">
     <div class="max-w-7xl mx-auto">
 
@@ -38,7 +36,7 @@
                     </div>
 
                     {{-- Crypto data - Table --}}
-                    <div class="overflow-x-auto rounded-lg shadow-xl ring-1 ring-white/10">
+                    <div class="overflow-x-auto rounded-lg shadow-xl ring-1 ring-white/10 mb-5">
                         <table class="min-w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-200 border border-white/10">
                             
                             {{-- table head row --}}
@@ -52,6 +50,13 @@
                             </tbody>
                     
                         </table>
+                    </div>
+
+                    {{-- Profit --}}
+                    <div class="text-end mt-3">
+                        <p class="inline-block border {{ $profits[$coinId] > 0 ? 'bg-green-600/10 text-green-400 border-green-500/20' : 'bg-red-600/10 text-red-400 border-red-500/20' }} px-4 py-2 rounded-lg font-semibold shadow-sm">
+                            Profit: {{ $profits[$coinId] }} USD
+                        </p>
                     </div>
                     
                 </div>
