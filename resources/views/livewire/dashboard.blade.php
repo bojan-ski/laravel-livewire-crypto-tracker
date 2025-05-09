@@ -1,16 +1,9 @@
 <div class="dashboard-page text-gray-100 mt-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {{-- error --}}
+        {{-- error message --}}
         @if ($error)
-            <div class="text-center bg-red-600/10 border border-red-500 text-red-400 px-4 py-3 rounded mb-4" role="alert">
-                <strong class="font-bold">
-                    Error:
-                </strong>
-                <span class="block sm:inline">
-                    {{ $error }}
-                </span>
-            </div>
+            <livewire:error-message :$error />            
         @endif
 
         {{-- search option --}}
@@ -31,6 +24,7 @@
                     </thead>
 
                     <tbody class="bg-gray-900 divide-y divide-gray-800 text-sm">
+                        {{-- no crypto (table) data message --}}
                         @if (count($cryptoData) === 0)
                             <tr>
                                 <td colspan="8" class="px-6 py-4 text-center text-xl font-semibold text-gray-500">

@@ -4,15 +4,10 @@
     <div class="max-w-7xl mx-auto">
 
         @if ($error)
-            <div class="text-center bg-red-600/10 border border-red-500 text-red-400 px-4 py-3 rounded-lg shadow mb-6" role="alert">
-                <strong class="font-bold">
-                    Error:
-                </strong>
-                <span class="block sm:inline">
-                    {{ $error }}
-                </span>
-            </div>
-        @elseif($groupedItems->isEmpty())        
+            {{-- error message --}}
+            <livewire:error-message :$error />
+        @elseif($groupedItems->isEmpty())  
+            {{-- no data message --}}
             <h2 class="text-center font-bold text-white text-5xl">
                 No data available
             </h2>       

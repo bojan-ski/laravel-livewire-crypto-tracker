@@ -12,10 +12,10 @@ class Dashboard extends Component
     public $cryptoData = [];
     public int $page = 1;
     public int $perPage = 10;
-    public ?string $error = null;
     public $searchedCryptoData = [];
+    public ?string $error = null;
 
-    // initial fetch
+    // initial setup
     public function mount(): void
     {
         $this->fetchCryptoData();
