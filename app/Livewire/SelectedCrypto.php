@@ -3,8 +3,8 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Traits\FetchCryptoDataTrait;
 use Illuminate\View\View;
+use App\Traits\FetchCryptoDataTrait;
 
 class SelectedCrypto extends Component
 { 

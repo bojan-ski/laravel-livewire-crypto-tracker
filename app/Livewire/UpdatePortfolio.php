@@ -3,17 +3,20 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
+use App\Traits\FetchCryptoDataTrait;
 
 class UpdatePortfolio extends Component
 {
+    // import helper function/trait
+    use FetchCryptoDataTrait;
+
+    // variables
     public string $icon;
     public string $path;
     public string $selectedCryptoDataId;
     public $selectedCryptoData = [];
-    public ?string $error = null;
 
     // initial setup
     public function mount($icon, $path, $selectedCryptoDataId, $selectedCryptoData = []): void
@@ -21,33 +24,7 @@ class UpdatePortfolio extends Component
         $this->icon = $icon;
         $this->path = $path;
         $this->selectedCryptoDataId = $selectedCryptoDataId;
-        $this->selectedCryptoData = count($selectedCryptoData) === 0 ? $this->fetchSelectedCryptoData() : $selectedCryptoData;
-
-        // dd($this->selectedCryptoData);
-        // dd(count($selectedCryptoData) === 0);
-    }
-
-    // api call - fetch selected crypto data
-    public function fetchSelectedCryptoData(): string|array
-    {
-        try {
-            $response = Http::get("https://api.coingecko.com/api/v3/coins/{$this->selectedCryptoDataId}", [
-                'localization' => 'false',
-                'tickers' => 'false',
-                'market_data' => 'true',
-                'community_data' => 'false',
-                'developer_data' => 'false',
-                'sparkline' => true,
-            ]);
-
-            if ($response->successful()) {
-                return collect($response->json());
-            } else {
-                return 'Failed to fetch crypto data. API returned status: ' . $response->status();
-            }
-        } catch (\Exception $e) {
-            return 'Error connecting to crypto API: ' . $e->getMessage();
-        }
+        $this->selectedCryptoData = count($selectedCryptoData) === 0 ? $this->fetchSelectedCryptoData($selectedCryptoDataId) : $selectedCryptoData;
     }
 
     // store selected crypto data in session func

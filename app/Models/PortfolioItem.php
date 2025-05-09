@@ -15,12 +15,11 @@ class PortfolioItem extends Model
         'portfolio_id',
         'coin_id',
         'quantity',
+        'selected_currency',
+        'crypto_market_price',
         'crypto_purchase_price',
-        'crypto_market_price_on_purchase',
         'total_spend',
-        'purchase_currency',
         'crypto_sell_price',
-        'crypto_market_price_on_sell',
         'total_received',
     ];
 

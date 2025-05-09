@@ -11,9 +11,12 @@ use App\Models\PortfolioItem;
 
 class AddCrypto extends Component
 {
+    // variables
     public string $selectedCryptoDataId;
     public $selectedCryptoData = [];
+    public ?string $error = null;
 
+    // form validation and variables
     #[Validate('required|numeric')]
     public $quantity;
     #[Validate('required|numeric')]
@@ -21,7 +24,7 @@ class AddCrypto extends Component
     #[Validate('required|numeric')]
     public $crypto_purchase_price;
     #[Validate('required|string')]
-    public $purchase_currency = 'USD';
+    public $selected_currency = 'USD';
 
     // initial setup
     public function mount($cryptoId): void
@@ -31,8 +34,13 @@ class AddCrypto extends Component
 
         // get selected crypto data from session
         if (Session::has('selectedCryptoData')) {
-            $this->selectedCryptoData = Session::get('selectedCryptoData');
-            // dd($this->selectedCryptoData);
+            $sessionData = Session::get('selectedCryptoData');
+
+            if(is_array($sessionData)){
+                $this->selectedCryptoData = $sessionData;
+            }else{
+                $this->error = $sessionData;
+            }
         }
     }
 
@@ -49,9 +57,9 @@ class AddCrypto extends Component
                 'coin_id' => $this->selectedCryptoDataId,
                 'quantity' => $this->quantity,
                 'total_spend' => $this->total_spend,
+                'selected_currency' => $this->selected_currency,
                 'crypto_purchase_price' => $this->crypto_purchase_price,
-                'crypto_market_price_on_purchase' => $this->selectedCryptoData['market_data']['current_price']['usd'],
-                'purchase_currency' => $this->purchase_currency,
+                'crypto_market_price' => $this->selectedCryptoData['market_data']['current_price']['usd'],
             ]);
 
             // success msg
@@ -60,7 +68,6 @@ class AddCrypto extends Component
             // redirect user
             $this->redirectRoute('addCrypto', ['cryptoId' => $this->selectedCryptoDataId]);
         } catch (\Exception $e) {
-            dd($e);
             // error msg
             session()->flash('status', 'There was an error adding the crypto.');
 
