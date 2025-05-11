@@ -13,14 +13,16 @@ class Portfolio extends Component
     // variables
     public $portfolioItems = [];
     public $groupedItems = [];
-    public $profits = [];
+    public $currencyProfits = [];
+    public $usdProfits = [];
     public ?string $error = null;
 
     // initial setup
     public function mount(): void
     {
         $this->fetchPortfolioItems();
-        $this->calculateProfit();
+        $this->calculateProfitBasedOnCurrency();
+        $this->calculateProfitBasedOnDollar();
     }
 
     // get user portfolio items from database
@@ -36,19 +38,73 @@ class Portfolio extends Component
         }
     }
 
-    // calculate profits func
-    public function calculateProfit(): void
+    // calculate profits by coin and currency func
+    public function calculateProfitBasedOnCurrency(): void
     {
-        $this->profits = $this->groupedItems->map(function ($items) {
-            $totalSpend = $items->sum('total_spend');
-            $totalReceived = $items->sum('total_received');
-            return $totalReceived - $totalSpend;
-        });
+        $profitsByCurrency = [];
+
+        // group by coin_id and selected_currency
+        $groupedByCoinAndCurrency = [];
+
+        foreach ($this->portfolioItems as $item) {
+            $coinId = $item['coin_id'];
+            $currency = $item['selected_currency'];
+
+            $groupedByCoinAndCurrency[$coinId][$currency][] = $item;
+        }
+
+        // calc profit for each coin_id/selected_currency
+        foreach ($groupedByCoinAndCurrency as $coinId => $currencyGroups) {
+            $profitsByCurrency[$coinId] = [];
+
+            foreach ($currencyGroups as $currency => $items) {
+                $allTotalSpend = 0;
+                $allTotalReceived = 0;
+
+                foreach ($items as $item) {
+                    if (!is_null($item['total_spend'])) {
+                        $allTotalSpend += $item['total_spend'];
+                    }
+
+                    if (!is_null($item['total_received'])) {
+                        $allTotalReceived += $item['total_received'];
+                    }
+                }
+
+                $profitsByCurrency[$coinId][$currency] = $allTotalReceived - $allTotalSpend;
+            }
+        }
+
+        $this->currencyProfits = $profitsByCurrency;
+    }
+
+    // calculate profits by USD func
+    public function calculateProfitBasedOnDollar(): void
+    {
+        foreach ($this->groupedItems as $coinId => $items) {
+            $totalPurchase =  0;
+            $totalSell = 0;
+
+            foreach ($items as $item) {
+                if (!is_null($item['crypto_purchase_price'])) {
+                    $purchaseAmount = $item['quantity'] * $item['crypto_purchase_price'];
+                    $totalPurchase += $purchaseAmount;
+                }
+
+                if (!is_null($item['crypto_sell_price'])) {
+                    $sellAmount = $item['quantity'] * $item['crypto_sell_price'];
+                    $totalSell += $sellAmount;
+                }
+            }
+
+            $this->usdProfits[$coinId] = $totalSell - $totalPurchase;
+        }
     }
 
     // render view
     public function render(): View
     {
+        // dd($this->currencyProfits);
         return view('livewire.portfolio');
     }
 }

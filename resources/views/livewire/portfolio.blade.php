@@ -52,10 +52,20 @@
                         </table>
                     </div>
 
-                    {{-- Profit --}}
-                    <div class="text-end mt-3">
-                        <p class="inline-block border {{ $profits[$coinId] > 0 ? 'bg-green-600/10 text-green-400 border-green-500/20' : 'bg-red-600/10 text-red-400 border-red-500/20' }} px-4 py-2 rounded-lg font-semibold shadow-sm">
-                            Profit: {{ $profits[$coinId] }} USD
+                    {{-- Profits --}}
+                    <div class="flex flex-col items-end mt-3">
+                        {{-- profit based on currency --}}
+                        @foreach ($currencyProfits[$coinId] as $key => $value)
+                            @if (!$value == 'USD')                                
+                                <p class="border w-56 text-end {{ $value > 0 ? 'bg-green-600/10 text-green-400 border-green-500/20' : 'bg-red-600/10 text-red-400 border-red-500/20' }} px-4 py-2 rounded-lg font-semibold shadow-sm mb-3">
+                                    Profit: {{ $value }} {{ $key }}
+                                </p>
+                            @endif
+                        @endforeach
+
+                        {{-- profit based on USD --}}
+                        <p class="border w-56 text-end {{ $usdProfits[$coinId] > 0 ? 'bg-green-600/10 text-green-400 border-green-500/20' : 'bg-red-600/10 text-red-400 border-red-500/20' }} px-4 py-2 rounded-lg font-semibold shadow-sm">
+                            Profit: {{ $usdProfits[$coinId] }} USD
                         </p>
                     </div>
                     
